@@ -66,13 +66,12 @@ export const reducerFn = (state: State, action: Action): State => {
         playOver: false,
         gameOver: false,
         isTie: false,
-        whoseTurn: action.payload,
+        whoseTurn: "X",
       };
     case "RESTART_GAME":
       return {
         ...state,
         ...initialState,
-        whoseTurn: action.payload,
       };
     case "UPDATE_BOARD":
       newBoards = state.boards.map((row, rowIndex) =>
@@ -103,7 +102,7 @@ export const reducerFn = (state: State, action: Action): State => {
       return {
         ...state,
         boards: newBoards,
-        whoseTurn: state.whoseTurn === "X" ? "O" : "X",
+        whoseTurn: action.payload.value === "X" ? "O" : "X",
       };
     default:
       return state;

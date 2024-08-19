@@ -10,7 +10,6 @@ export const useGameState = () => {
     return {
       ...initialState,
       opponent: params.get("playWith") as PlayerType,
-      whoseTurn: params.get("playerMarker") as Marker,
     } as State;
   }, [params]);
   const [state, dispatch] = React.useReducer(reducerFn, computedInitialState);
@@ -34,6 +33,7 @@ export const useGameState = () => {
 };
 
 export const initialState = {
+  whoseTurn: "X" as Marker,
   boards: [
     [0, 0, 0],
     [0, 0, 0],

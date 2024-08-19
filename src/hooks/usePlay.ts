@@ -27,7 +27,7 @@ export const usePlay = (
   }, [boardMap]);
 
   function resetBoard() {
-    dispatch({ type: "RESET_BOARD", payload: playerMarker });
+    dispatch({ type: "RESET_BOARD" });
   }
   const updateScore = React.useCallback(
     (marker: Marker | "T") => {
@@ -91,9 +91,11 @@ export const usePlay = (
 
   // CPU PLAY LOGIC START
   React.useEffect(() => {
+    let timeout: number;
     const cpuMarker = playerMarker === "X" ? "O" : "X";
+
     if (playWith === "CPU" && state.whoseTurn === cpuMarker) {
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         let played = false;
         played = tryPlayBestMove(cpuMarker, cpuMarker);
         played = tryPlayBestMove(playerMarker, cpuMarker, played);
@@ -107,6 +109,8 @@ export const usePlay = (
         }
       }, 1000);
     }
+
+    return () => clearTimeout(timeout);
   }, [
     state.whoseTurn,
     playWith,

@@ -11,8 +11,8 @@ export type Action =
       type: "UPDATE_BOARD";
       payload: { row: number; col: number; value: string };
     }
-  | { type: "RESET_BOARD"; payload: Marker }
-  | { type: "RESTART_GAME"; payload: Marker };
+  | { type: "RESET_BOARD" }
+  | { type: "RESTART_GAME" };
 
 export type State = {
   whoseTurn: Marker;
